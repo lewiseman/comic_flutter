@@ -19,7 +19,7 @@ Future<List<Tv>> getTv(String item) async {
   }
 }
 
-Future<List<Movie>> getMovie(String type) async {
+Future<List<Movie>> getMovies(String type) async {
   final url = Uri.parse(
       'https://api.themoviedb.org/3/$type?api_key=$tmdbApiKey&language=en-US&page=1');
   final response = await http.get(url);
@@ -29,6 +29,19 @@ Future<List<Movie>> getMovie(String type) async {
     List<Movie> movies =
         List<Movie>.from(jsonBody.map((dynamic body) => Movie.fromJson(body)));
     return movies;
+  } else {
+    throw Exception('Unable to fetch data from the TMDB API');
+  }
+}
+
+Future<SingleMovie> getSingleMovie(int movieId) async {
+  final url = Uri.parse(
+      'https://api.themoviedb.org/3/movie/$movieId?api_key=$tmdbApiKey&language=en-US&page=1');
+  final response = await http.get(url);
+  if (response.statusCode == 200) {
+    final jsonData = convert.jsonDecode(response.body);
+    SingleMovie movie = SingleMovie.fromJson(jsonData);
+    return movie;
   } else {
     throw Exception('Unable to fetch data from the TMDB API');
   }

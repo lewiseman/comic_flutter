@@ -78,7 +78,7 @@ class RecentData extends StatefulWidget {
 class _RecentDataState extends State<RecentData> {
   @override
   Widget build(BuildContext context) {
-    Future<List<Movie>> data = getMovie(widget.address);
+    Future<List<Movie>> data = getMovies(widget.address);
     return FutureBuilder(
       future: data,
       builder: (BuildContext context, AsyncSnapshot<List<Movie>> snapshot) {

@@ -1,6 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:comics/root.dart';
-import 'package:comics/screens/home/single_movie.dart';
+import 'package:comics/screens/home/movie/single_movie.dart';
 import 'package:comics/sevices/tmdb/calls.dart';
 import 'package:comics/sevices/tmdb/movie.dart';
 import 'package:comics/widgets/percent/tmdb_progress.dart';
@@ -81,7 +81,7 @@ class RecentData extends StatefulWidget {
 class _RecentDataState extends State<RecentData> {
   @override
   Widget build(BuildContext context) {
-    Future<List<Movie>> data = getMovie(widget.address);
+    Future<List<Movie>> data = getMovies(widget.address);
     return FutureBuilder(
       future: data,
       builder: (BuildContext context, AsyncSnapshot<List<Movie>> snapshot) {
@@ -140,7 +140,7 @@ class SingleCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                   image: DecorationImage(
                     image: NetworkImage(
-                      'https://www.themoviedb.org/t/p/w220_and_h330_face/${movie.backdropPath}',
+                      'https://www.themoviedb.org/t/p/w220_and_h330_face/${movie.posterPath}',
                     ),
                     fit: BoxFit.cover,
                   ),
