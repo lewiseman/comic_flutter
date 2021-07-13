@@ -10,3 +10,6 @@ final String hash = generateMd5(ts + marvelPrivateKey + marvelPublicKey);
 String generateMd5(String input) {
   return md5.convert(utf8.encode(input)).toString();
 }
+
+String tmdbApiKey = 'a35c46cae4151d9995bce1e8953da172';
+String tmdbUrl = 'https://api.themoviedb.org/3/';

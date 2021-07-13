@@ -1,6 +1,3 @@
-import 'package:animations/animations.dart';
-import 'package:comics/root.dart';
-import 'package:comics/screens/home/single_movie.dart';
 import 'package:comics/sevices/tmdb/calls.dart';
 import 'package:comics/sevices/tmdb/movie.dart';
 import 'package:comics/widgets/percent/tmdb_progress.dart';
@@ -9,14 +6,14 @@ import 'package:comics/widgets/toggle/toggler.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class PopularPart extends StatefulWidget {
-  const PopularPart({Key? key}) : super(key: key);
+class TrendingPart extends StatefulWidget {
+  const TrendingPart({Key? key}) : super(key: key);
 
   @override
-  _PopularPartState createState() => _PopularPartState();
+  _TrendingPartState createState() => _TrendingPartState();
 }
 
-class _PopularPartState extends State<PopularPart> {
+class _TrendingPartState extends State<TrendingPart> {
   ValueNotifier<bool> isOnTv = ValueNotifier(true);
   @override
   Widget build(BuildContext context) {
@@ -27,12 +24,12 @@ class _PopularPartState extends State<PopularPart> {
           padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
           child: Row(
             children: [
-              toggleTittle('What\'s Popular'),
+              toggleTittle('Trending'),
               Spacer(),
               Toggler(
                 isFirst: isOnTv,
-                firstTitle: 'On TV',
-                secondTitle: 'In Theaters',
+                firstTitle: 'Today',
+                secondTitle: 'This Week',
               ),
             ],
           ),
@@ -100,14 +97,8 @@ class _RecentDataState extends State<RecentData> {
                 physics: BouncingScrollPhysics(),
                 itemCount: movie!.length,
                 scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) => OpenContainer(
-                  closedColor: bgColor.withOpacity(0),
-                  closedBuilder: (context, close) => SingleCard(
-                    movie: movie[index],
-                  ),
-                  openBuilder: (context, open) => SingleMoviePage(
-                    movie: movie[index],
-                  ),
+                itemBuilder: (context, index) => SingleCard(
+                  movie: movie[index],
                 ),
               );
             }
@@ -147,24 +138,6 @@ class SingleCard extends StatelessWidget {
                 ),
                 width: size.width * .30,
                 height: size.height * .20,
-              ),
-              Positioned(
-                child: PopupMenuButton(
-                  itemBuilder: (context) => [
-                    PopupMenuItem(
-                      child: Text("Save Item"),
-                      value: 2,
-                    ),
-                    PopupMenuItem(
-                      child: Text("Watch later"),
-                      value: 2,
-                    ),
-                    PopupMenuItem(
-                      child: Text("Add Review"),
-                      value: 2,
-                    ),
-                  ],
-                ),
               ),
               Positioned(
                 bottom: -18,

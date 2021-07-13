@@ -1,3 +1,4 @@
+import 'package:comics/screens/search/root.dart';
 import 'package:flutter/material.dart';
 
 class SearchPart extends StatelessWidget {
@@ -5,8 +6,10 @@ class SearchPart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16),
+    Size size = MediaQuery.of(context).size;
+    return Container(
+      width: size.width,
+      height: 45,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -16,20 +19,33 @@ class SearchPart extends StatelessWidget {
           ),
           InkWell(
             child: Padding(
-              padding: EdgeInsets.only(top: 10, bottom: 8),
-              child: Text(
-                'Movie, Actors, Directors ...',
-                style: TextStyle(
-                    fontSize: 20,
-                    letterSpacing: 1.5,
-                    fontWeight: FontWeight.w200),
+              padding: EdgeInsets.only(top: 2),
+              child: Row(
+                children: [
+                  Text(
+                    'Movie, Actors, Directors ...',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w200,
+                    ),
+                    maxLines: 1,
+                  ),
+                  Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 4),
+                    child: Icon(Icons.search),
+                  )
+                ],
               ),
             ),
-            onTap: () async {
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SearchPage(),
+                ),
+              );
             },
-          ),
-          Divider(
-            color: Colors.white,
           ),
         ],
       ),
