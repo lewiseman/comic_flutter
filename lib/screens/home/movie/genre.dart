@@ -24,7 +24,7 @@ class _GenreState extends State<Genre> {
             border: Border.all(width: 1, color: Colors.white),
             borderRadius: BorderRadius.circular(4),
           ),
-          child: Text('Action'),
+          child: Text('${element["name"]}'),
         ),
       );
     });

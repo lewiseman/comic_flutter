@@ -5,14 +5,14 @@ class Tv {
   int? id;
   List? originCountry;
   String? originalLanguage;
-  String? originalTitle;
+  String? title;
   String? overview;
   double? popularity;
   String? posterPath;
   String? firstAirDate;
   String? name;
   bool? video;
-  //var? voteAverage;
+  dynamic voteAverage;
   int? voteCount;
 
   Tv(
@@ -22,14 +22,14 @@ class Tv {
       this.id,
       this.originCountry,
       this.originalLanguage,
-      this.originalTitle,
+      this.title,
       this.overview,
       this.popularity,
       this.posterPath,
       this.firstAirDate,
       this.name,
       this.video,
-      //this.voteAverage,
+      this.voteAverage,
       this.voteCount});
 
   factory Tv.fromJson(Map<String, dynamic> json) => Tv(
@@ -39,13 +39,13 @@ class Tv {
       id: json['id'],
       originCountry: json['origin_country'],
       originalLanguage: json['original_language'],
-      originalTitle: json['original_title'],
+      title: json['original_name'],
       overview: json['overview'],
       popularity: json['popularity'],
       posterPath: json['poster_path'],
       firstAirDate: json['first_air_date'],
       name: json['name'],
       video: json['video'],
-      //voteAverage: json['vote_average'],
+      voteAverage: json['vote_average'],
       voteCount: json['vote_count']);
 }

@@ -3,9 +3,11 @@ import 'package:comics/root.dart';
 import 'package:comics/screens/home/movie/single_movie.dart';
 import 'package:comics/sevices/tmdb/calls.dart';
 import 'package:comics/sevices/tmdb/movie.dart';
+import 'package:comics/sevices/tmdb/tv.dart';
 import 'package:comics/widgets/percent/tmdb_progress.dart';
 import 'package:comics/widgets/toggle/toggle_tittle.dart';
-import 'package:comics/widgets/toggle/toggler.dart';
+import 'package:comics/widgets/toggle/toggler_gradient.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -29,7 +31,7 @@ class _PopularPartState extends State<PopularPart> {
             children: [
               toggleTittle('What\'s Popular'),
               Spacer(),
-              Toggler(
+              TogglerGradient(
                 isFirst: isOnTv,
                 firstTitle: 'On TV',
                 secondTitle: 'In Theaters',
@@ -43,14 +45,14 @@ class _PopularPartState extends State<PopularPart> {
               firstChild: Container(
                 height: size.height * .28,
                 width: size.width,
-                child: RecentData(
-                  address: 'movie/upcoming',
+                child: OnTv(
+                  address: 'tv/popular',
                 ),
               ),
               secondChild: Container(
                 height: size.height * .28,
                 width: size.width,
-                child: RecentData(
+                child: InTheaters(
                   address: 'movie/now_playing',
                 ),
               ),
@@ -66,8 +68,8 @@ class _PopularPartState extends State<PopularPart> {
   }
 }
 
-class RecentData extends StatefulWidget {
-  const RecentData({
+class OnTv extends StatefulWidget {
+  const OnTv({
     Key? key,
     required this.address,
   }) : super(key: key);
@@ -75,10 +77,65 @@ class RecentData extends StatefulWidget {
   final String address;
 
   @override
-  _RecentDataState createState() => _RecentDataState();
+  _OnTvState createState() => _OnTvState();
 }
 
-class _RecentDataState extends State<RecentData> {
+class _OnTvState extends State<OnTv> {
+  Future<List<Tv>> data = getTv('tv/popular');
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: data,
+      builder: (BuildContext context, AsyncSnapshot<List<Tv>> snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.none:
+            return Text('data');
+          case ConnectionState.active:
+          case ConnectionState.waiting:
+            return Center(child: CupertinoActivityIndicator());
+          case ConnectionState.done:
+            if (snapshot.hasError) {
+              return Text('${snapshot.error}');
+            }
+            if (snapshot.hasData) {
+              List<Tv>? movie = snapshot.data;
+              return ListView.builder(
+                physics: BouncingScrollPhysics(),
+                itemCount: movie!.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) => OpenContainer(
+                  middleColor: bgColor,
+                  closedColor: bgColor,
+                  openColor: bgColor,
+                  closedBuilder: (context, close) => SingleCard(
+                    movie: movie[index],
+                  ),
+                  openBuilder: (context, open) => Text('data'),
+                ),
+              );
+            }
+            return Text('unknown');
+          default:
+            return Text('data');
+        }
+      },
+    );
+  }
+}
+
+class InTheaters extends StatefulWidget {
+  const InTheaters({
+    Key? key,
+    required this.address,
+  }) : super(key: key);
+
+  final String address;
+
+  @override
+  _InTheatersState createState() => _InTheatersState();
+}
+
+class _InTheatersState extends State<InTheaters> {
   @override
   Widget build(BuildContext context) {
     Future<List<Movie>> data = getMovies(widget.address);
@@ -101,7 +158,9 @@ class _RecentDataState extends State<RecentData> {
                 itemCount: movie!.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) => OpenContainer(
-                  closedColor: bgColor.withOpacity(0),
+                  middleColor: bgColor,
+                  closedColor: bgColor,
+                  openColor: bgColor,
                   closedBuilder: (context, close) => SingleCard(
                     movie: movie[index],
                   ),
@@ -121,7 +180,7 @@ class _RecentDataState extends State<RecentData> {
 }
 
 class SingleCard extends StatelessWidget {
-  final Movie movie;
+  final dynamic movie;
   const SingleCard({Key? key, required this.movie}) : super(key: key);
 
   @override
@@ -169,9 +228,7 @@ class SingleCard extends StatelessWidget {
               Positioned(
                 bottom: -18,
                 left: 30,
-                child: MovieRateIndicator(
-                  percent: 20,
-                ),
+                child: MovieRateIndicator(percent: movie.voteAverage * 10),
               ),
             ],
           ),

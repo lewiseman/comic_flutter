@@ -13,13 +13,9 @@ class SearchPart extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Search',
-            style: TextStyle(fontSize: 10),
-          ),
           InkWell(
             child: Padding(
-              padding: EdgeInsets.only(top: 2),
+              padding: EdgeInsets.only(top: 16),
               child: Row(
                 children: [
                   Text(

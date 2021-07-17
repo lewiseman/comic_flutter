@@ -32,14 +32,17 @@ class MainInfo extends StatelessWidget {
             width: 140,
           ),
           Container(
-            margin: EdgeInsets.only(left: 6.5),
+            width: 180,
+            margin: EdgeInsets.only(
+              left: 8,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
+                Wrap(
                   children: [
                     Text(
-                      'Title: ',
+                      'Title:  ',
                       style: GoogleFonts.poppins(
                         color: Colors.grey,
                         fontWeight: FontWeight.bold,
@@ -51,10 +54,12 @@ class MainInfo extends StatelessWidget {
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
+                      maxLines: 4,
+                      softWrap: true,
                     )
                   ],
                 ),
-                Row(
+                Wrap(
                   children: [
                     Text(
                       'Running Time: ',
@@ -63,16 +68,19 @@ class MainInfo extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(
-                      '${movie.runtime} min',
-                      style: GoogleFonts.poppins(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
+                    Container(
+                      width: 100,
+                      child: Text(
+                        '${movie.runtime} min',
+                        style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     )
                   ],
                 ),
-                Row(
+                Wrap(
                   children: [
                     Text(
                       'Release Date: ',
@@ -90,35 +98,35 @@ class MainInfo extends StatelessWidget {
                     )
                   ],
                 ),
-                Row(
+                // Wrap(
+                //   children: [
+                //     Text(
+                //       'data: ',
+                //       style: GoogleFonts.poppins(
+                //         color: Colors.grey,
+                //         fontWeight: FontWeight.bold,
+                //       ),
+                //     ),
+                //     Text(
+                //       'data',
+                //       style: GoogleFonts.poppins(
+                //         color: Colors.white,
+                //         fontWeight: FontWeight.bold,
+                //       ),
+                //     )
+                //   ],
+                // ),
+                Wrap(
                   children: [
                     Text(
-                      'data: ',
+                      'Status: ',
                       style: GoogleFonts.poppins(
                         color: Colors.grey,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
-                      'data',
-                      style: GoogleFonts.poppins(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    )
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text(
-                      'data: ',
-                      style: GoogleFonts.poppins(
-                        color: Colors.grey,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      'data',
+                      '${movie.status}',
                       style: GoogleFonts.poppins(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,

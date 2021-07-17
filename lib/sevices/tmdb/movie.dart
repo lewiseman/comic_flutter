@@ -11,7 +11,8 @@ class Movie {
   String releaseDate;
   String title;
   bool? video;
-  //var? voteAverage;
+
+  dynamic voteAverage;
   int? voteCount;
 
   Movie(
@@ -27,24 +28,25 @@ class Movie {
       required this.releaseDate,
       required this.title,
       this.video,
-      //this.voteAverage,
+      this.voteAverage,
       this.voteCount});
 
   factory Movie.fromJson(Map<String, dynamic> json) => Movie(
-      adult: json['adult'],
-      backdropPath: json['backdrop_path'],
-      genreIds: json['genre_ids'],
-      id: json['id'],
-      originalLanguage: json['original_language'],
-      originalTitle: json['original_title'],
-      overview: json['overview'],
-      popularity: json['popularity'],
-      posterPath: json['poster_path'],
-      releaseDate: json['release_date'],
-      title: json['title'],
-      video: json['video'],
-      //voteAverage: json['vote_average'],
-      voteCount: json['vote_count']);
+        adult: json['adult'],
+        backdropPath: json['backdrop_path'],
+        genreIds: json['genre_ids'],
+        id: json['id'],
+        originalLanguage: json['original_language'],
+        originalTitle: json['original_title'],
+        overview: json['overview'],
+        popularity: json['popularity'],
+        posterPath: json['poster_path'],
+        releaseDate: json['release_date'],
+        title: json['title'],
+        video: json['video'],
+        voteAverage: json['vote_average'],
+        voteCount: json['vote_count'],
+      );
 }
 
 class SingleMovie {
@@ -54,6 +56,7 @@ class SingleMovie {
   int id;
   String homepage;
   String originalLanguage;
+  String status;
   String originalTitle;
   String overview;
   double popularity;
@@ -75,6 +78,7 @@ class SingleMovie {
     required this.originalLanguage,
     required this.originalTitle,
     required this.overview,
+    required this.status,
     required this.popularity,
     required this.posterPath,
     required this.runtime,
@@ -104,5 +108,6 @@ class SingleMovie {
         video: json['video'],
         voteAverage: json['vote_average'],
         voteCount: json['vote_count'],
+        status: json['status'],
       );
 }

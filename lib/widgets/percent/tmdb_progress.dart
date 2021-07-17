@@ -49,8 +49,9 @@ class _MovieRateIndicatorState extends State<MovieRateIndicator> {
     return Center(
       child: RichText(
         text: TextSpan(
-          text: '${widget.percent}',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 10),
+          text: '${widget.percent.toString().substring(0, 2)}',
+          style: TextStyle(
+              fontWeight: FontWeight.bold, color: Colors.white, fontSize: 10),
           children: [
             WidgetSpan(
               child: Transform.translate(
@@ -72,7 +73,8 @@ class _MovieRateIndicatorState extends State<MovieRateIndicator> {
     return Center(
       child: Text(
         'NR',
-        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 10),
+        style: TextStyle(
+            fontWeight: FontWeight.bold, color: Colors.white, fontSize: 10),
       ),
     );
   }

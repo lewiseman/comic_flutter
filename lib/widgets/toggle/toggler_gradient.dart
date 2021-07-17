@@ -104,11 +104,11 @@ class _TogglerGradientState extends State<TogglerGradient> {
               child: AnimatedDefaultTextStyle(
                 child: Padding(
                   key: firstKey,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   child: Text(widget.firstTitle),
                 ),
                 style: GoogleFonts.poppins(
-                  fontSize: 16,
+                  fontSize: 10,
                   fontWeight: FontWeight.bold,
                   color: firstToggleActive ? Color(0xFF0e1d32) : Colors.white,
                 ),
@@ -140,11 +140,11 @@ class _TogglerGradientState extends State<TogglerGradient> {
                 child: AnimatedDefaultTextStyle(
                   child: Padding(
                     key: secondKey,
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     child: Text(widget.secondTitle),
                   ),
                   style: GoogleFonts.poppins(
-                    fontSize: 16,
+                    fontSize: 10,
                     fontWeight: FontWeight.bold,
                     color:
                         secondToggleActive ? Color(0xFF0e1d32) : Colors.white,
