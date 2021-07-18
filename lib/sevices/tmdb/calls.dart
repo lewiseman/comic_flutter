@@ -1,6 +1,7 @@
 import 'package:comics/sevices/services.dart';
 import 'package:comics/sevices/tmdb/movie.dart';
 import 'package:comics/sevices/tmdb/tv.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
@@ -28,6 +29,24 @@ Future<List<Movie>> getMovies(String type) async {
     final jsonBody = jsonData['results'];
     List<Movie> movies =
         List<Movie>.from(jsonBody.map((dynamic body) => Movie.fromJson(body)));
+    return movies;
+  } else {
+    throw Exception('Unable to fetch data from the TMDB API');
+  }
+}
+
+Future<List<Movie>> getMoviesPaginated(String type, int page) async {
+  final url = Uri.parse(
+      'https://api.themoviedb.org/3/$type?api_key=$tmdbApiKey&language=en-US&page=$page');
+  final response = await http.get(url);
+  if (response.statusCode == 200) {
+    final jsonData = convert.json.decode(response.body);
+    debugPrint(jsonData);
+    debugPrint('===========================================================');
+    final jsonBody = jsonData['results'];
+    List<Movie> movies =
+        List<Movie>.from(jsonBody.map((dynamic body) => Movie.fromJson(body)));
+    print(movies);
     return movies;
   } else {
     throw Exception('Unable to fetch data from the TMDB API');

@@ -1,4 +1,5 @@
 import 'package:comics/root.dart';
+import 'package:comics/screens/drawer/root.dart';
 import 'package:comics/widgets/swiper/swipe_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
@@ -103,25 +104,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget buildDrawer() {
-    return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ListTile(
-            leading: Icon(Icons.hail_outlined),
-            title: Text('Title'),
-          ),
-          ListTile(
-            leading: Icon(Icons.home_max),
-            title: Text('Title'),
-          ),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Title'),
-          ),
-        ],
-      ),
-    );
+    return AppDrawer();
   }
 }

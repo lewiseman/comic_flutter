@@ -78,6 +78,17 @@ class SwipeDrawerState extends State<SwipeDrawer>
           return Stack(
             clipBehavior: Clip.none,
             children: [
+              Image(
+                image: NetworkImage(
+                    'https://images.unsplash.com/photo-1525672716948-1f0bb9c49883?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80'),
+                fit: BoxFit.cover,
+                height: size.height,
+              ),
+              Container(
+                color: Colors.black.withOpacity(0.9),
+                height: size.height,
+                width: size.width,
+              ),
               Transform.translate(
                 offset: Offset(0, 0),
                 child: InkWell(
@@ -85,7 +96,7 @@ class SwipeDrawerState extends State<SwipeDrawer>
                   child: Container(
                     height: size.height,
                     width: size.width,
-                    color: widget.backgroundColor,
+                    //color: widget.backgroundColor,
                   ),
                 ),
               ),
@@ -96,10 +107,11 @@ class SwipeDrawerState extends State<SwipeDrawer>
                       widget.bodySize + widget.bodyBackgroundPeekSize, reverse),
                 ),
               GestureDetector(
-                  onHorizontalDragStart: (details) {},
-                  behavior: HitTestBehavior.translucent,
-                  child: buildAnimationBody(
-                      scale, size, widget.bodySize, reverse)),
+                onHorizontalDragStart: (details) {},
+                behavior: HitTestBehavior.translucent,
+                child:
+                    buildAnimationBody(scale, size, widget.bodySize, reverse),
+              ),
               Transform.translate(
                 offset:
                     Offset(-size.width * (1 - animation.value) * reverse, 0),

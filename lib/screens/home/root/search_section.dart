@@ -19,7 +19,8 @@ class SearchPart extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    'Movie, Actors, Directors ...',
+                    's',
+                    // 'Movie, Actors, Directors ...',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w200,
