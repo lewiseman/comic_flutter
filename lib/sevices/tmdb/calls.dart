@@ -20,9 +20,9 @@ Future<List<Tv>> getTv(String item) async {
   }
 }
 
-Future<List<Movie>> getMovies(String type) async {
+Future<List<Movie>> getMovies(String type ,int page) async {
   final url = Uri.parse(
-      'https://api.themoviedb.org/3/$type?api_key=$tmdbApiKey&language=en-US&page=1');
+      'https://api.themoviedb.org/3/$type?api_key=$tmdbApiKey&language=en-US&page=$page');
   final response = await http.get(url);
   if (response.statusCode == 200) {
     final jsonData = convert.jsonDecode(response.body);

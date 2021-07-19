@@ -1,15 +1,15 @@
 class Movie {
   bool? adult;
-  String backdropPath;
+  String? backdropPath;
   List? genreIds;
-  int id;
+  int? id;
   String? originalLanguage;
   String? originalTitle;
-  String overview;
+  String? overview;
   double? popularity;
-  String posterPath;
-  String releaseDate;
-  String title;
+  String? posterPath;
+  String? releaseDate;
+  String? title;
   bool? video;
 
   dynamic voteAverage;

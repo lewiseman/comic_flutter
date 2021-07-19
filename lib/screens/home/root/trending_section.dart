@@ -138,7 +138,7 @@ class InTheaters extends StatefulWidget {
 class _InTheatersState extends State<InTheaters> {
   @override
   Widget build(BuildContext context) {
-    Future<List<Movie>> data = getMovies(widget.address);
+    Future<List<Movie>> data = getMovies(widget.address, 5);
     return FutureBuilder(
       future: data,
       builder: (BuildContext context, AsyncSnapshot<List<Movie>> snapshot) {

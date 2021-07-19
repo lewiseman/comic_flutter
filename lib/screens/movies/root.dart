@@ -1,6 +1,7 @@
 import 'package:animations/animations.dart';
 import 'package:comics/root.dart';
 import 'package:comics/screens/home/movie/single_movie.dart';
+import 'package:comics/screens/movies/popular.dart';
 import 'package:comics/sevices/tmdb/calls.dart';
 import 'package:comics/sevices/tmdb/movie.dart';
 import 'package:comics/widgets/percent/tmdb_progress.dart';
@@ -21,7 +22,7 @@ class MovieTypes extends StatelessWidget {
         centerTitle: true,
         title: Text('Popular'),
       ),
-      body: PopularMovies(),
+      body: Popular(),
     );
   }
 }
@@ -34,7 +35,7 @@ class PopularMovies extends StatefulWidget {
 }
 
 class _PopularMoviesState extends State<PopularMovies> {
-  Future<List<Movie>> data = getMovies('movie/now_playing');
+  Future<List<Movie>> data = getMovies('movie/now_playing', 3);
   List<Movie>? movie = [];
   ScrollController _scrollController = ScrollController();
   int nextPage = 2;
@@ -53,16 +54,21 @@ class _PopularMoviesState extends State<PopularMovies> {
   }
 
   void _getMoreData() {
-    Future<List<Movie>> fetchedData =
-        getMoviesPaginated('movie/now_playing', nextPage);
-    fetchedData.then(
-      (value) => value.forEach(
-        (element) {
-          movie!.add(element);
-        },
-      ),
-    );
-    nextPage += 1;
+    // Future<List<Movie>> fetchedData =
+    //     getMoviesPaginated('movie/now_playing', nextPage);
+    // fetchedData.then(
+    //   (value) => value.forEach(
+    //     (element) {
+    //       movie!.add(element);
+    //     },
+    //   ),
+    // );
+    // nextPage += 1;
+    // setState(() {});
+    List<Movie>? moviee = movie;
+    moviee!.forEach((element) {
+      movie!.add(element);
+    });
     setState(() {});
   }
 

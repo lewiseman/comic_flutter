@@ -104,6 +104,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget buildDrawer() {
-    return AppDrawer();
+    return AppDrawer(
+      drawerKey: drawerKey,
+    );
   }
 }

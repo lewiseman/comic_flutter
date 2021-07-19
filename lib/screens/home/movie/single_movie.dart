@@ -36,7 +36,7 @@ class SingleMoviePage extends StatelessWidget {
                 )
               ],
               flexibleSpace: FlexibleSpaceBar(
-                title: Text(movie.title),
+                title: Text(movie.title ?? 'No Title'),
                 background: Container(
                   child: Stack(
                     children: [
@@ -87,7 +87,7 @@ class SingleMovieBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future<SingleMovie> singleData = getSingleMovie(initMovie.id);
+    Future<SingleMovie> singleData = getSingleMovie(initMovie.id ?? 1);
     return FutureBuilder(
       future: singleData,
       builder: (BuildContext context, AsyncSnapshot<SingleMovie> snapshot) {
@@ -146,7 +146,7 @@ class SingleMovieBody extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 16),
                     child: Center(
                       child: Text(
-                        initMovie.overview,
+                        initMovie.overview ?? 'No overview',
                         style: GoogleFonts.poppins(
                             letterSpacing: 1.6, wordSpacing: 1.5),
                       ),

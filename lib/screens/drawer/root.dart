@@ -1,10 +1,15 @@
 import 'package:comics/root.dart';
+import 'package:comics/screens/movies/now_playing.dart';
 import 'package:comics/screens/movies/root.dart';
+import 'package:comics/screens/movies/top_rated.dart';
+import 'package:comics/screens/movies/upcoming.dart';
+import 'package:comics/widgets/swiper/swipe_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppDrawer extends StatefulWidget {
-  AppDrawer({Key? key}) : super(key: key);
+  AppDrawer({Key? key, required this.drawerKey}) : super(key: key);
+  final GlobalKey<SwipeDrawerState> drawerKey;
 
   @override
   _AppDrawerState createState() => _AppDrawerState();
@@ -41,6 +46,25 @@ class _AppDrawerState extends State<AppDrawer> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    final List<Widget> expansionHead = [
+      ListTile(
+        title: Text(
+          'Movies',
+          style: GoogleFonts.poppins(fontSize: 16),
+        ),
+        onTap: () {
+          setState(() {
+            isOpen[0] = !isOpen[0];
+          });
+        },
+      ),
+      ListTile(
+        title: Text(
+          'TV Shows',
+          style: GoogleFonts.poppins(fontSize: 16),
+        ),
+      ),
+    ];
     final List<Widget> expansionBody = [
       Container(
         margin: EdgeInsets.only(left: 32),
@@ -57,35 +81,76 @@ class _AppDrawerState extends State<AppDrawer> {
               child: Column(
                 children: [
                   ListTile(
-                      title: Text(
-                        'Popular',
-                        style: GoogleFonts.poppins(),
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => MovieTypes(),
-                          ),
-                        );
-                      }),
+                    title: Text(
+                      'Popular',
+                      style: GoogleFonts.poppins(),
+                    ),
+                    onTap: () {
+                      setState(() {
+                        isOpen[0] = !isOpen[0];
+                      });
+                      widget.drawerKey.currentState!.closeDrawer();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MovieTypes(),
+                        ),
+                      );
+                    },
+                  ),
                   ListTile(
                     title: Text(
                       'Now Playing',
                       style: GoogleFonts.poppins(),
                     ),
+                    onTap: () {
+                      setState(() {
+                        isOpen[0] = !isOpen[0];
+                      });
+                      widget.drawerKey.currentState!.closeDrawer();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => NowPlaying(),
+                        ),
+                      );
+                    },
                   ),
                   ListTile(
                     title: Text(
                       'Upcoming',
                       style: GoogleFonts.poppins(),
                     ),
+                    onTap: () {
+                      setState(() {
+                        isOpen[0] = !isOpen[0];
+                      });
+                      widget.drawerKey.currentState!.closeDrawer();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Upcoming(),
+                        ),
+                      );
+                    },
                   ),
                   ListTile(
                     title: Text(
                       'Top Rated',
                       style: GoogleFonts.poppins(),
                     ),
+                    onTap: () {
+                      setState(() {
+                        isOpen[0] = !isOpen[0];
+                      });
+                      widget.drawerKey.currentState!.closeDrawer();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TopRated(),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -142,7 +207,7 @@ class _AppDrawerState extends State<AppDrawer> {
       child: Column(
         children: [
           SizedBox(height: size.height * .10),
-          FlutterLogo(size: 100),
+          FlutterLogo(size: 50),
           SizedBox(height: size.height * .05),
           ExpansionPanelList(
             elevation: 0,
